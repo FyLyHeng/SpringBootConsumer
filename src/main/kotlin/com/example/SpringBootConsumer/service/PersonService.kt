@@ -25,9 +25,9 @@ class PersonService(val personRepo: RestTemplate = RestTemplate()) {
 
         val response: ResponseEntity<MutableList<Person>>? =
                 personRepo.exchange(
-                        url = "${RESTConstant.URL_BASE}/person",
-                        method = HttpMethod.GET,
-                        requestEntity = HttpEntity("parameters", headers),
+                        "${RESTConstant.URL_BASE}/person",
+                        HttpMethod.GET,
+                        HttpEntity("parameters", headers),
                         typeReference<MutableList<Person>>()
                 )
         return response?.body
@@ -39,7 +39,7 @@ class PersonService(val personRepo: RestTemplate = RestTemplate()) {
 
     fun updatePerson(person: Person): Person {
         return personRepo.postForObject(
-                url = "${RESTConstant.URL_BASE}/person",
+                "${RESTConstant.URL_BASE}/person",
                 Person::class
         )
     }
@@ -47,7 +47,7 @@ class PersonService(val personRepo: RestTemplate = RestTemplate()) {
 
     fun savePerson(person: Person): Person {
         return personRepo.postForObject(
-                url = "${RESTConstant.URL_BASE}/person",
+                "${RESTConstant.URL_BASE}/person",
                 Person::class
         )
     }
@@ -56,4 +56,6 @@ class PersonService(val personRepo: RestTemplate = RestTemplate()) {
     fun deletePerson(id: Long) {
         personRepo.delete("${RESTConstant.URL_BASE}/person/$id")
     }
+
+
 }
